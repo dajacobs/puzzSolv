@@ -8,6 +8,7 @@ int puzzle[ROW][COL];
 // Prototypes
 void readFile(char* argv[]);
 void readMove(char* argv[]);
+void printPuzzle(int p[ROW][COL]);
 void checkInput(int c, char* v[]);
 int main(int argc, char* argv[]);
 
