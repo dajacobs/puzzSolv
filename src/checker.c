@@ -101,7 +101,7 @@ void checkInput(int c, char* v[]) {
 			printf("Arguments: [%d] = %s\n", count, v[count]);
 		}
 	} else {
-		printf("No more arguments.\n");
+		printf("No input arguments.\n");
 	}
 }
 int main(int argc, char* argv[]) {
@@ -112,5 +112,5 @@ int main(int argc, char* argv[]) {
 	printf("\n");
 	readMoves(argv);
 	//printPuzzle(puzzle);
-	return 0;
+	return 0;	
 }
