@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #define ROW 4
 #define COL 4
 #define MOV 256
@@ -8,14 +9,31 @@ int puzzle[ROW][COL];
 char moves[MOV];
 
 // Prototypes
+void moveUp(int p[ROW][COL]);
 void readFile(char* argv[]);
-void readMove(char* argv[]);
+void readMoves(char* argv[]);
 void printPuzzle(int p[ROW][COL]);
 void printMoves(char m[MOV]);
 void checkInput(int c, char* v[]);
 int main(int argc, char* argv[]);
 
-// Read file function
+// Functions
+void moveUp(int p[ROW][COL]) {
+	int temp;
+	for(int i = 0; i < ROW; i++) {
+		for(int j = 0; j < COL; j++) {
+			if(p[i][j] == 16) {
+				p[i-1][j] = temp;
+				p[i-1][j] = 16;
+				p[i][j] = temp;		
+			} else {
+				printf("Illegal move");
+			}
+		}
+	}
+	// Copy to puzzle array
+	memcpy(puzzle, p, (ROW*COL));
+}
 void readFile(char* argv[]) {
 	// Variables
 	char const* const fileName = argv[1];
@@ -35,8 +53,7 @@ void readFile(char* argv[]) {
 	// Close file
 	fclose(file);
 }
-// Read moves function
-void readMove(char* argv[]) {
+void readMoves(char* argv[]) {
 	// Variables
 	char const* const fileName = argv[2];
 	FILE* file;
@@ -52,7 +69,6 @@ void readMove(char* argv[]) {
 	printMoves(moves);
 	fclose(file);
 }
-// Print puzzle function
 void printPuzzle(int p[ROW][COL]) {
 	for(int i = 0; i < ROW; i++) {
 		for(int j = 0; j < COL; j++) {
@@ -77,7 +93,6 @@ void printMoves(char m[MOV]) {
 		printf("\n");
 	}
 }
-// Check input function
 void checkInput(int c, char* v[]) {
 	int count;
 	printf("Function: %s\n", v[0]);
@@ -89,14 +104,13 @@ void checkInput(int c, char* v[]) {
 		printf("No more arguments.\n");
 	}
 }
-// Main function
 int main(int argc, char* argv[]) {
 	printf("\n");
 	checkInput(argc, argv);
 	printf("\n");
 	readFile(argv);
 	printf("\n");
-	readMove(argv);
+	readMoves(argv);
 	//printPuzzle(puzzle);
 	return 0;
 }
