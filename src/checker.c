@@ -23,7 +23,7 @@ void checkInput(int c, char* v[]) {
 	printf("Function: %s\n", v[0]);
 	if(c > 1) {
 		for(count = 1; count < c; count++) {
-			printf("Argument: [%d] = %s\n", count, v[count]);
+			printf("Arguments: [%d] = %s\n", count, v[count]);
 		}
 	} else {
 		printf("No more arguments.\n");
