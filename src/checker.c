@@ -16,14 +16,19 @@ int main(int argc, char* argv[]);
 void readFile(char* argv[]) {
 	// Variables
 	char const* const fileName = argv[1];
-	int temp[ROW * COL];
 	FILE* file;
-
+	// Open file and store variables
 	printf("Input File: %s\n", fileName);
 	file = fopen(fileName, "r");
-	for(int i = 0; i < 16; i++) {
-		fscanf(file, "%d", &temp[i]);
+	for(int i = 0; i < ROW; i++) {
+		for(int j = 0; j < COL; j++) {
+			fscanf(file, "%d", &puzzle[i][j]);
+		}
 	}
+	// Output to user
+	printf("Puzzle stored:\n");
+	printPuzzle(puzzle);
+	// Close file
 	fclose(file);
 }
 // Read moves function
@@ -57,8 +62,8 @@ void checkInput(int c, char* v[]) {
 }
 // Main function
 int main(int argc, char* argv[]) {
-	//checkInput(argc, argv);
-	//readFile(argv);
+	checkInput(argc, argv);
+	readFile(argv);
 	//readMove(argv);
 	//printPuzzle(p);
 	return 0;
