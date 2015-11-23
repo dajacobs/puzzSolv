@@ -14,7 +14,17 @@ int main(int argc, char* argv[]);
 
 // Read file function
 void readFile(char* argv[]) {
-	printf("Input File: %s\n", argv[1]);
+	// Variables
+	char const* const fileName = argv[1];
+	int temp[ROW * COL];
+	FILE* file;
+
+	printf("Input File: %s\n", fileName);
+	file = fopen(fileName, "r");
+	for(int i = 0; i < 16; i++) {
+		fscanf(file, "%d", &temp[i]);
+	}
+	fclose(file);
 }
 // Read moves function
 void readMove(char* argv[]) {
