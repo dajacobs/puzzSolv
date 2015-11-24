@@ -15,6 +15,7 @@ void moveLeft(int p[ROW][COL]);
 void moveRight(int p[ROW][COL]);
 void readFile(char* argv[]);
 void readMoves(char* argv[]);
+void applyMoves(void);
 void printPuzzle(int p[ROW][COL]);
 void printMoves(char m[MOV]);
 void checkInput(int c, char* v[]);
@@ -122,6 +123,25 @@ void readMoves(char* argv[]) {
 	printMoves(moves);
 	fclose(file);
 }
+void applyMoves(void) {
+	for(int i = 0; i < MOV; i++) {
+		// Move up
+		if(moves[i] == 'w') {
+			moveUp(puzzle);
+		// Move down	
+		} else if(moves[i] == 's') {
+			moveDown(puzzle);
+		// Move left	
+		} else if(moves[i] == 'a') {
+			moveLeft(puzzle);
+		// Move right
+		} else if(moves[i] == 'd') {
+			moveRight(puzzle);
+		} else {
+			printf("Illegal move");
+		}
+	}
+}
 void printPuzzle(int p[ROW][COL]) {
 	for(int i = 0; i < ROW; i++) {
 		for(int j = 0; j < COL; j++) {
@@ -159,17 +179,19 @@ void checkInput(int c, char* v[]) {
 }
 int checkState(int p[ROW][COL], int q[ROW][COL], size_t s) {
 	int n;
+	int result;
 	n = memcmp(p, q, s);
 	// Greater
 	if(n > 0) {
-		return 1;
+		result = 1;
 	// Lesser
 	} else if(n < 0) {
-		return -1;
+		result = -1;
 	// Equal	
 	} else {
-		return 0;
+		result = 0;
 	}
+	return result;
 }
 int compareState(int p[ROW][COL], int q[ROW][COL]) {
 	int i, j;
@@ -181,7 +203,8 @@ int compareState(int p[ROW][COL], int q[ROW][COL]) {
 				break;
 			}
 		}
-	} 
+	}
+	return result; 
 }
 int main(int argc, char* argv[]) {
 	printf("\n");
