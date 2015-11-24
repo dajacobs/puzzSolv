@@ -159,10 +159,13 @@ void checkInput(int c, char* v[]) {
 int checkState(int p[ROW][COL], int q[ROW][COL], size_t s) {
 	int n;
 	n = memcmp(p, q, s);
+	// Greater
 	if(n > 0) {
 		return 1;
+	// Lesser
 	} else if(n < 0) {
 		return -1;
+	// Equal	
 	} else {
 		return 0;
 	}
