@@ -71,13 +71,20 @@ void moveRight(int p[ROW][COL]) {
 	int temp;
 	for(int i = 0; i < ROW; i++) {
 		for(int j = 0; j < COL; j++) {
-			if(p[i][j] == 16) {
+			if(j = 4) {
+				goto terminate;	
+			} else if(p[i][j] == 16){
+				printf("\n");
+				printf("i=%d j=%d\n", i, j);
+				printf("i=%d j=%d\n", i, j+1);
 				temp = p[i][j+1];
-				p[i][j+1] = 16;
-				p[i][j] = temp;		
+				p[i][j+1] = p[i][j];
+				p[i][j] = temp;
+				goto terminate;
 			}
 		}
 	}
+terminate:
 	// Copy to puzzle array
 	memcpy(puzzle, p, (ROW*COL));
 }
@@ -209,9 +216,11 @@ int main(int argc, char* argv[]) {
 	readFile(argv);
 	printf("\n");
 	readMoves(argv);
-	printf("Applying moves\n");
-	applyMoves();
-	printf("\n");
+	// printf("Applying moves\n");
+	// applyMoves();
+	// printf("\n");
+	// printPuzzle(puzzle);
+	moveRight(puzzle);
 	printPuzzle(puzzle);
 	return 0;	
 }
