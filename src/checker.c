@@ -10,6 +10,7 @@ char moves[MOV];
 
 // Prototypes
 void moveUp(int p[ROW][COL]);
+void moveDown(int p[ROW][COL]);
 void readFile(char* argv[]);
 void readMoves(char* argv[]);
 void printPuzzle(int p[ROW][COL]);
@@ -23,8 +24,24 @@ void moveUp(int p[ROW][COL]) {
 	for(int i = 0; i < ROW; i++) {
 		for(int j = 0; j < COL; j++) {
 			if(p[i][j] == 16) {
-				p[i-1][j] = temp;
-				p[i-1][j] = 16;
+				temp = p[i-1][j];
+				p[i-1][j] = p[i][j];
+				p[i][j] = temp;		
+			} else {
+				printf("Illegal move");
+			}
+		}
+	}
+	// Copy to puzzle array
+	memcpy(puzzle, p, (ROW*COL));
+}
+void moveDown(int p[ROW][COL]) {
+	int temp;
+	for(int i = 0; i < ROW; i++) {
+		for(int j = 0; j < COL; j++) {
+			if(p[i][j] == 16) {
+				temp = p[i+1][j];
+				p[i+1][j] = p[i][j];
 				p[i][j] = temp;		
 			} else {
 				printf("Illegal move");
