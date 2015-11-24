@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #define ROW 4
 #define COL 4
 #define MOV 256
@@ -29,9 +30,17 @@ void moveUp(int p[ROW][COL]) {
 	int temp;
 	for(int i = 0; i < ROW; i++) {
 		for(int j = 0; j < COL; j++) {
-			if(i > 0) {
-				goto terminate;		
-			} else if(p[i][j] == 16 && i  > 0) {
+			if(i < 0) {
+				printf("\n");
+				printf("%d %d\n", i, j);
+				printf("%d %d\n", i-1, j);
+				printf("\n");
+				break;		
+			} else if(p[i][j] == 16 || i  > 0) {
+				printf("\n");
+				printf("%d %d\n", i, j);
+				printf("%d %d\n", i-1, j);
+				printf("\n");
 				temp = p[i-1][j];
 				p[i-1][j] = p[i][j];
 				p[i][j] = temp;
@@ -41,15 +50,23 @@ void moveUp(int p[ROW][COL]) {
 	}
 terminate:	
 	// Copy to puzzle array
-	memcpy(puzzle, p, (ROW*COL));
+	memcpy(puzzle, p, 16);
 }
 void moveDown(int p[ROW][COL]) {
 	int temp;
 	for(int i = 0; i < ROW; i++) {
 		for(int j = 0; j < COL; j++) {
 			if(i > 3) {	
-				goto terminate;	
-			} else if(p[i][j] == 16 && i < 4) {
+				printf("\n");
+				printf("%d %d\n", i, j);
+				printf("%d %d\n", i+1, j);
+				printf("\n");
+				break;	
+			} else if(p[i][j] == 16 || i < 4) {
+				printf("\n");
+				printf("%d %d\n", i, j);
+				printf("%d %d\n", i+1, j);
+				printf("\n");
 				temp = p[i+1][j];
 				p[i+1][j] = p[i][j];
 				p[i][j] = temp;
@@ -59,15 +76,23 @@ void moveDown(int p[ROW][COL]) {
 	}
 terminate:	
 	// Copy to puzzle array
-	memcpy(puzzle, p, (ROW*COL));
+	memcpy(puzzle, p, 16);
 }
 void moveLeft(int p[ROW][COL]) {
 	int temp;
 	for(int i = 0; i < ROW; i++) {
 		for(int j = 0; j < COL; j++) {
 			if(j < 0) {
-				goto terminate;		
-			} else if(p[i][j] == 16 && j > 0) {
+				printf("\n");
+				printf("%d %d\n", i, j);
+				printf("%d %d\n", i, j-1);
+				printf("\n");
+				break;		
+			} else if(p[i][j] == 16 || j > 0) {
+				printf("\n");
+				printf("%d %d\n", i, j);
+				printf("%d %d\n", i, j-1);
+				printf("\n");
 				temp = p[i][j-1];
 				p[i][j-1] = p[i][j];
 				p[i][j] = temp;
@@ -77,25 +102,39 @@ void moveLeft(int p[ROW][COL]) {
 	}
 terminate:
 	// Copy to puzzle array
-	memcpy(puzzle, p, (ROW*COL));
+	memcpy(puzzle, p, 16);
 }
 void moveRight(int p[ROW][COL]) {
 	int temp;
 	for(int i = 0; i < ROW; i++) {
 		for(int j = 0; j < COL; j++) {
 			if(j > 3) {
-				goto terminate;	
-			} else if(p[i][j] == 16 && j < 4){
-				temp = p[i][j+1];
-				p[i][j+1] = p[i][j];
-				p[i][j] = temp;
-				goto terminate;
+				printf("j > 3");
+				printf("\n");
+				printf("%d %d\n", i, j);
+				printf("%d %d\n", i, j+1);
+				printf("\n");
+			 	goto terminate;
+			} else if(p[i][j] == 16){
+				if((j+1) > 3) {
+					break;
+				} else {
+					printf("j < 4");
+					printf("\n");
+					printf("%d %d\n", i, j);
+					printf("%d %d\n", i, j+1);
+					printf("\n");
+					temp = p[i][j+1];
+					p[i][j+1] = p[i][j];
+					p[i][j] = temp;
+					goto terminate;
+				}
 			}
 		}
 	}
 terminate:
 	// Copy to puzzle array
-	memcpy(puzzle, p, (ROW*COL));
+	memcpy(puzzle, p, 16);
 }
 void readFile(char* argv[]) {
 	// Variables
@@ -133,25 +172,28 @@ void readMoves(char* argv[]) {
 	fclose(file);
 }
 void applyMoves(void) {
+	printf("Applying moves:");
 	for(int i = 0; i < MOV; i++) {
 		// Move up
 		if(moves[i] == 'w') {
+			printf("Moved Up:\n");
+			printPuzzle(puzzle);
 			moveUp(puzzle);
 		// Move down	
 		} else if(moves[i] == 's') {
+			printf("Moved down:\n");
+			printPuzzle(puzzle);
 			moveDown(puzzle);
 		// Move left	
 		} else if(moves[i] == 'a') {
+			printf("Moved left:\n");
+			printPuzzle(puzzle);
 			moveLeft(puzzle);
 		// Move right
 		} else if(moves[i] == 'd') {
+			printf("Moved right:\n");
+			printPuzzle(puzzle);
 			moveRight(puzzle);
-		} else {
-			if(moves[i] == '\0') {
-				break;
-			} else {
-				printf("Illegal move");
-			}
 		}
 	}
 }
@@ -225,11 +267,13 @@ int main(int argc, char* argv[]) {
 	readFile(argv);
 	printf("\n");
 	readMoves(argv);
-	// printf("Applying moves\n");
+	printf("\n");
+	moveRight(puzzle);
 	// applyMoves();
 	// printf("\n");
 	// printPuzzle(puzzle);
-	moveUp(puzzle);
+	// printf("\n");
+	printf("FINAL PRINT OUT\n");
 	printPuzzle(puzzle);
 	return 0;	
 }
