@@ -19,6 +19,7 @@ void printPuzzle(int p[ROW][COL]);
 void printMoves(char m[MOV]);
 void checkInput(int c, char* v[]);
 int checkState(int p[ROW][COL], int q[ROW][COL], size_t s);
+int compareState(int p[ROW][COL], int q[ROW][COL]);
 int main(int argc, char* argv[]);
 
 // Functions
@@ -169,6 +170,18 @@ int checkState(int p[ROW][COL], int q[ROW][COL], size_t s) {
 	} else {
 		return 0;
 	}
+}
+int compareState(int p[ROW][COL], int q[ROW][COL]) {
+	int i, j;
+	int result = 1;
+	for(i = 0; i < ROW; i++) {
+		for(j = 0; j < COL; j++) {
+			if(p[i][j] != q[i][j]) {
+				result = 0;
+				break;
+			}
+		}
+	} 
 }
 int main(int argc, char* argv[]) {
 	printf("\n");
