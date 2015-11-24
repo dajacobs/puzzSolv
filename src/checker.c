@@ -12,6 +12,7 @@ char moves[MOV];
 void moveUp(int p[ROW][COL]);
 void moveDown(int p[ROW][COL]);
 void moveLeft(int p[ROW][COL]);
+void moveRight(int p[ROW][COL]);
 void readFile(char* argv[]);
 void readMoves(char* argv[]);
 void printPuzzle(int p[ROW][COL]);
@@ -59,6 +60,22 @@ void moveLeft(int p[ROW][COL]) {
 			if(p[i][j] == 16) {
 				temp = p[i][j-1];
 				p[i][j-1] = p[i][j];
+				p[i][j] = temp;		
+			} else {
+				printf("Illegal move");
+			}
+		}
+	}
+	// Copy to puzzle array
+	memcpy(puzzle, p, (ROW*COL));
+}
+void moveRight(int p[ROW][COL]) {
+	int temp;
+	for(int i = 0; i < ROW; i++) {
+		for(int j = 0; j < COL; j++) {
+			if(p[i][j] == 16) {
+				temp = p[i][j+1];
+				p[i][j+1] = p[i][j];
 				p[i][j] = temp;		
 			} else {
 				printf("Illegal move");
