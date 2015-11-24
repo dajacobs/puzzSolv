@@ -31,10 +31,8 @@ void moveUp(int p[ROW][COL]) {
 		for(int j = 0; j < COL; j++) {
 			if(p[i][j] == 16) {
 				temp = p[i-1][j];
-				p[i-1][j] = p[i][j];
+				p[i-1][j] = 16;
 				p[i][j] = temp;		
-			} else {
-				printf("Illegal move");
 			}
 		}
 	}
@@ -47,10 +45,8 @@ void moveDown(int p[ROW][COL]) {
 		for(int j = 0; j < COL; j++) {
 			if(p[i][j] == 16) {
 				temp = p[i+1][j];
-				p[i+1][j] = p[i][j];
+				p[i+1][j] = 16;
 				p[i][j] = temp;		
-			} else {
-				printf("Illegal move");
 			}
 		}
 	}
@@ -63,10 +59,8 @@ void moveLeft(int p[ROW][COL]) {
 		for(int j = 0; j < COL; j++) {
 			if(p[i][j] == 16) {
 				temp = p[i][j-1];
-				p[i][j-1] = p[i][j];
+				p[i][j-1] = 16;
 				p[i][j] = temp;		
-			} else {
-				printf("Illegal move");
 			}
 		}
 	}
@@ -79,10 +73,8 @@ void moveRight(int p[ROW][COL]) {
 		for(int j = 0; j < COL; j++) {
 			if(p[i][j] == 16) {
 				temp = p[i][j+1];
-				p[i][j+1] = p[i][j];
+				p[i][j+1] = 16;
 				p[i][j] = temp;		
-			} else {
-				printf("Illegal move");
 			}
 		}
 	}
@@ -139,7 +131,11 @@ void applyMoves(void) {
 		} else if(moves[i] == 'd') {
 			moveRight(puzzle);
 		} else {
-			printf("Illegal move");
+			if(moves[i] == '\0') {
+				break;
+			} else {
+				printf("Illegal move");
+			}
 		}
 	}
 }
@@ -174,7 +170,7 @@ void checkInput(int c, char* v[]) {
 			printf("Arguments: [%d] = %s\n", count, v[count]);
 		}
 	} else {
-		printf("No input arguments.\n");
+		printf("No input arguments\n");
 	}
 }
 int checkState(int p[ROW][COL], int q[ROW][COL], size_t s) {
@@ -213,7 +209,9 @@ int main(int argc, char* argv[]) {
 	readFile(argv);
 	printf("\n");
 	readMoves(argv);
+	printf("Applying moves\n");
 	applyMoves();
-	//printPuzzle(puzzle);
+	printf("\n");
+	printPuzzle(puzzle);
 	return 0;	
 }
