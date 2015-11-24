@@ -57,13 +57,17 @@ void moveLeft(int p[ROW][COL]) {
 	int temp;
 	for(int i = 0; i < ROW; i++) {
 		for(int j = 0; j < COL; j++) {
-			if(p[i][j] == 16) {
+			if(j < 0) {
+				goto terminate;		
+			} else if(p[i][j] == 16 && j > 0) {
 				temp = p[i][j-1];
-				p[i][j-1] = 16;
-				p[i][j] = temp;		
+				p[i][j-1] = p[i][j];
+				p[i][j] = temp;
+				goto terminate;
 			}
 		}
 	}
+terminate:
 	// Copy to puzzle array
 	memcpy(puzzle, p, (ROW*COL));
 }
@@ -71,9 +75,9 @@ void moveRight(int p[ROW][COL]) {
 	int temp;
 	for(int i = 0; i < ROW; i++) {
 		for(int j = 0; j < COL; j++) {
-			if(j = 4) {
+			if(j > 3) {
 				goto terminate;	
-			} else if(p[i][j] == 16){
+			} else if(p[i][j] == 16 j < 4){
 				temp = p[i][j+1];
 				p[i][j+1] = p[i][j];
 				p[i][j] = temp;
