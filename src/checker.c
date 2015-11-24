@@ -74,9 +74,6 @@ void moveRight(int p[ROW][COL]) {
 			if(j = 4) {
 				goto terminate;	
 			} else if(p[i][j] == 16){
-				printf("\n");
-				printf("i=%d j=%d\n", i, j);
-				printf("i=%d j=%d\n", i, j+1);
 				temp = p[i][j+1];
 				p[i][j+1] = p[i][j];
 				p[i][j] = temp;
