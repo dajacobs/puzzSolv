@@ -7,6 +7,7 @@
 // Variables
 int puzzle[ROW][COL];
 char moves[MOV];
+int solved[ROW][COL] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
 
 // Prototypes
 void moveUp(int p[ROW][COL]);
@@ -154,7 +155,6 @@ void printPuzzle(int p[ROW][COL]) {
 		printf("\n");
 	}
 }
-// Print moves function
 void printMoves(char m[MOV]) {
 	for(int i = 0; i < MOV; i++) {
 		if(moves[i] != '\0') {
@@ -213,6 +213,7 @@ int main(int argc, char* argv[]) {
 	readFile(argv);
 	printf("\n");
 	readMoves(argv);
+	applyMoves();
 	//printPuzzle(puzzle);
 	return 0;	
 }
