@@ -18,6 +18,7 @@ void readMoves(char* argv[]);
 void printPuzzle(int p[ROW][COL]);
 void printMoves(char m[MOV]);
 void checkInput(int c, char* v[]);
+int checkState(int p[ROW][COL], int q[ROW][COL], size_t s);
 int main(int argc, char* argv[]);
 
 // Functions
@@ -153,6 +154,17 @@ void checkInput(int c, char* v[]) {
 		}
 	} else {
 		printf("No input arguments.\n");
+	}
+}
+int checkState(int p[ROW][COL], int q[ROW][COL], size_t s) {
+	int n;
+	n = memcmp(p, q, s);
+	if(n > 0) {
+		return 1;
+	} else if(n < 0) {
+		return -1;
+	} else {
+		return 0;
 	}
 }
 int main(int argc, char* argv[]) {
