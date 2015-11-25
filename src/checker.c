@@ -248,8 +248,6 @@ int main(int argc, char* argv[]) {
 	printf("\n");
 	applyMoves();
 	printf("\n");
-	printPuzzle(puzzle);
-	printf("\n");
 	printf("FINAL PRINT OUT\n");
 	printPuzzle(puzzle);
 	return 0;	
