@@ -31,20 +31,16 @@ void moveUp(int p[ROW][COL]) {
 	for(int i = 0; i < ROW; i++) {
 		for(int j = 0; j < COL; j++) {
 			if(i < 0) {
-				printf("\n");
-				printf("%d %d\n", i, j);
-				printf("%d %d\n", i-1, j);
-				printf("\n");
-				break;		
-			} else if(p[i][j] == 16 || i  > 0) {
-				printf("\n");
-				printf("%d %d\n", i, j);
-				printf("%d %d\n", i-1, j);
-				printf("\n");
-				temp = p[i-1][j];
-				p[i-1][j] = p[i][j];
-				p[i][j] = temp;
-				goto terminate;
+				goto terminate;		
+			} else if(p[i][j] == 16) {
+				if((i-1) < 0) {
+					break;
+				} else {
+					temp = p[i-1][j];
+					p[i-1][j] = p[i][j];
+					p[i][j] = temp;
+					goto terminate;
+				}
 			}
 		}
 	}
@@ -57,20 +53,16 @@ void moveDown(int p[ROW][COL]) {
 	for(int i = 0; i < ROW; i++) {
 		for(int j = 0; j < COL; j++) {
 			if(i > 3) {	
-				printf("\n");
-				printf("%d %d\n", i, j);
-				printf("%d %d\n", i+1, j);
-				printf("\n");
-				break;	
-			} else if(p[i][j] == 16 || i < 4) {
-				printf("\n");
-				printf("%d %d\n", i, j);
-				printf("%d %d\n", i+1, j);
-				printf("\n");
-				temp = p[i+1][j];
-				p[i+1][j] = p[i][j];
-				p[i][j] = temp;
-				goto terminate;
+				goto terminate;	
+			} else if(p[i][j] == 16) {
+				if((i+1) > 3) {
+					break;	
+				} else {
+					temp = p[i+1][j];
+					p[i+1][j] = p[i][j];
+					p[i][j] = temp;
+					goto terminate;
+				}
 			}
 		}
 	}
@@ -83,20 +75,16 @@ void moveLeft(int p[ROW][COL]) {
 	for(int i = 0; i < ROW; i++) {
 		for(int j = 0; j < COL; j++) {
 			if(j < 0) {
-				printf("\n");
-				printf("%d %d\n", i, j);
-				printf("%d %d\n", i, j-1);
-				printf("\n");
-				break;		
-			} else if(p[i][j] == 16 || j > 0) {
-				printf("\n");
-				printf("%d %d\n", i, j);
-				printf("%d %d\n", i, j-1);
-				printf("\n");
-				temp = p[i][j-1];
-				p[i][j-1] = p[i][j];
-				p[i][j] = temp;
-				goto terminate;
+				goto terminate;		
+			} else if(p[i][j] == 16) {
+				if((j-1) < 0) {
+					break;
+				} else {
+					temp = p[i][j-1];
+					p[i][j-1] = p[i][j];
+					p[i][j] = temp;
+					goto terminate;
+				}
 			}
 		}
 	}
@@ -109,21 +97,11 @@ void moveRight(int p[ROW][COL]) {
 	for(int i = 0; i < ROW; i++) {
 		for(int j = 0; j < COL; j++) {
 			if(j > 3) {
-				printf("j > 3");
-				printf("\n");
-				printf("%d %d\n", i, j);
-				printf("%d %d\n", i, j+1);
-				printf("\n");
 			 	goto terminate;
 			} else if(p[i][j] == 16){
 				if((j+1) > 3) {
 					break;
 				} else {
-					printf("j < 4");
-					printf("\n");
-					printf("%d %d\n", i, j);
-					printf("%d %d\n", i, j+1);
-					printf("\n");
 					temp = p[i][j+1];
 					p[i][j+1] = p[i][j];
 					p[i][j] = temp;
@@ -268,11 +246,10 @@ int main(int argc, char* argv[]) {
 	printf("\n");
 	readMoves(argv);
 	printf("\n");
-	moveRight(puzzle);
-	// applyMoves();
-	// printf("\n");
-	// printPuzzle(puzzle);
-	// printf("\n");
+	applyMoves();
+	printf("\n");
+	printPuzzle(puzzle);
+	printf("\n");
 	printf("FINAL PRINT OUT\n");
 	printPuzzle(puzzle);
 	return 0;	
