@@ -245,12 +245,15 @@ int main(int argc, char* argv[]) {
 	printf("\n");
 	applyMoves();
 	printf("\n");
+	printf("Checking final state...\n");
 	if((checkElement(puzzle, solved)) == 1) {
 		printf("Puzzle solved...Final state:\n");
 		printPuzzle(puzzle);
+		printf("Checking state...Result: %d\n", checkState(puzzle, solved, 16));
 	} else if((checkElement(puzzle, solved)) == 0) {
 		printf("Puzzle not solved...Final state:\n");
 		printPuzzle(puzzle);
+		printf("Checking state...Result: %d\n", checkState(puzzle, solved, 16));
 	}
 	return 0;	
 }
