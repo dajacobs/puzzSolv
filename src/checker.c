@@ -22,7 +22,7 @@ void printPuzzle(int p[ROW][COL]);
 void printMoves(char m[MOV]);
 void checkInput(int c, char* v[]);
 int checkState(int p[ROW][COL], int q[ROW][COL], size_t s);
-int compareState(int p[ROW][COL], int q[ROW][COL]);
+int checkElement(int p[ROW][COL], int q[ROW][COL]);
 int main(int argc, char* argv[]);
 
 // Functions
@@ -150,27 +150,23 @@ void readMoves(char* argv[]) {
 	fclose(file);
 }
 void applyMoves(void) {
-	printf("Applying moves:");
+	printf("Applying moves...Illegal moves not done:\n");
 	for(int i = 0; i < MOV; i++) {
 		// Move up
 		if(moves[i] == 'w') {
-			printf("Moved Up:\n");
-			printPuzzle(puzzle);
+			printf("Moved Up\n");
 			moveUp(puzzle);
 		// Move down	
 		} else if(moves[i] == 's') {
-			printf("Moved down:\n");
-			printPuzzle(puzzle);
+			printf("Moved down\n");
 			moveDown(puzzle);
 		// Move left	
 		} else if(moves[i] == 'a') {
-			printf("Moved left:\n");
-			printPuzzle(puzzle);
+			printf("Moved left\n");
 			moveLeft(puzzle);
 		// Move right
 		} else if(moves[i] == 'd') {
-			printf("Moved right:\n");
-			printPuzzle(puzzle);
+			printf("Moved right\n");
 			moveRight(puzzle);
 		}
 	}
@@ -207,6 +203,8 @@ void checkInput(int c, char* v[]) {
 		}
 	} else {
 		printf("No input arguments\n");
+		printf("Please input via: ./checker [INPUT_FILE].txt\n");
+		printf("Output file: output.txt\n");
 	}
 }
 int checkState(int p[ROW][COL], int q[ROW][COL], size_t s) {
@@ -225,14 +223,13 @@ int checkState(int p[ROW][COL], int q[ROW][COL], size_t s) {
 	}
 	return result;
 }
-int compareState(int p[ROW][COL], int q[ROW][COL]) {
+int checkElement(int p[ROW][COL], int q[ROW][COL]) {
 	int i, j;
 	int result = 1;
 	for(i = 0; i < ROW; i++) {
 		for(j = 0; j < COL; j++) {
 			if(p[i][j] != q[i][j]) {
 				result = 0;
-				break;
 			}
 		}
 	}
@@ -248,7 +245,12 @@ int main(int argc, char* argv[]) {
 	printf("\n");
 	applyMoves();
 	printf("\n");
-	printf("FINAL PRINT OUT\n");
-	printPuzzle(puzzle);
+	if((checkElement(puzzle, solved)) == 1) {
+		printf("Puzzle solved...Final state:\n");
+		printPuzzle(puzzle);
+	} else if((checkElement(puzzle, solved)) == 0) {
+		printf("Puzzle not solved...Final state:\n");
+		printPuzzle(puzzle);
+	}
 	return 0;	
 }
