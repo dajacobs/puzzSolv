@@ -17,7 +17,6 @@ void moveLeft(int p[ROW][COL]);
 void moveRight(int p[ROW][COL]);
 void readFile(char* argv[]);
 void writeFile(int p[ROW][COL]);
-void readMoves(char* argv[]);
 void applyMoves(void);
 void printPuzzle(int p[ROW][COL]);
 void printMoves(char m[MOV]);
@@ -123,14 +122,21 @@ void readFile(char* argv[]) {
 	printf("Input File: %s\n", fileName);
 	// Open file and store variables
 	file = fopen(fileName, "r");
+	// Store puzzle
 	for(int i = 0; i < ROW; i++) {
 		for(int j = 0; j < COL; j++) {
-			fscanf(file, "%d", &puzzle[i][j]);
+			fscanf(file, "%d ", &puzzle[i][j]);
 		}
+	}
+	// Store moves
+	for(int i = 0; i < MOV; i++) {
+		fscanf(file, "%c\n", &moves[i]);
 	}
 	// Output to user
 	printf("Puzzle stored:\n");
 	printPuzzle(puzzle);
+	printf("Moves stored:\n");
+	printMoves(moves);
 	// Close file
 	fclose(file);
 }
@@ -152,22 +158,6 @@ void writeFile(int p[ROW][COL]) {
 		}
 	}
 	fclose(file);		
-}
-void readMoves(char* argv[]) {
-	// Variables
-	char const* const fileName = argv[2];
-	FILE* file;
-	// Print input file to user
-	printf("Moves File: %s\n", fileName);
-	// Open file and store variables
-	file = fopen(fileName, "r");
-	for(int i = 0; i < MOV; i++) {
-		fscanf(file, "%c\n", &moves[i]);
-	}
-	// Output to user
-	printf("Moves stored:\n");
-	printMoves(moves);
-	fclose(file);
 }
 void applyMoves(void) {
 	printf("Applying moves...Illegal moves not done:\n");
@@ -260,8 +250,6 @@ int main(int argc, char* argv[]) {
 	checkInput(argc, argv);
 	printf("\n");
 	readFile(argv);
-	printf("\n");
-	readMoves(argv);
 	printf("\n");
 	applyMoves();
 	printf("\n");
