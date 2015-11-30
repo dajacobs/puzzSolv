@@ -16,6 +16,7 @@ void moveDown(int p[ROW][COL]);
 void moveLeft(int p[ROW][COL]);
 void moveRight(int p[ROW][COL]);
 void readFile(char* argv[]);
+void writeFile(int p[ROW][COL]);
 void readMoves(char* argv[]);
 void applyMoves(void);
 void printPuzzle(int p[ROW][COL]);
@@ -132,6 +133,25 @@ void readFile(char* argv[]) {
 	printPuzzle(puzzle);
 	// Close file
 	fclose(file);
+}
+void writeFile(int p[ROW][COL]) {
+	// Variables
+	char const* const fileName = "output.txt";
+	FILE* file;
+	// Print output file to user
+	printf("Ouput File: %s\n", fileName);
+	// Write file and store variables
+	file = fopen(fileName, "w");
+	for(int i = 0; i < ROW; i++) {
+		for(int j = 0; j < COL; j++) {
+			if((i == 0 || 1 || 2 || 3) && j == 3) {
+				fprintf(file, "%d \n", p[i][j]);
+			} else {
+				fprintf(file, "%d ", p[i][j]);
+			}
+		}
+	}
+	fclose(file);		
 }
 void readMoves(char* argv[]) {
 	// Variables
@@ -255,5 +275,8 @@ int main(int argc, char* argv[]) {
 		printPuzzle(puzzle);
 		printf("Checking state...Result: %d\n", checkState(puzzle, solved, 16));
 	}
+	printf("\n");
+	writeFile(puzzle);
+	printf("\n");
 	return 0;	
 }
