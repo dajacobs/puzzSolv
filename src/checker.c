@@ -135,6 +135,7 @@ void readFile(char* argv[]) {
 	// Output to user
 	printf("Puzzle stored:\n");
 	printPuzzle(puzzle);
+	printf("\n");
 	printf("Moves stored:\n");
 	printMoves(moves);
 	// Close file
@@ -265,6 +266,8 @@ int main(int argc, char* argv[]) {
 	}
 	printf("\n");
 	writeFile(puzzle);
+	printf("\n");
+	printf("To repeat, simply call with new input file\n");
 	printf("\n");
 	return 0;	
 }
