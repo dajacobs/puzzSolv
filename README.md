@@ -4,6 +4,6 @@
 - Outputs final state of puzzle given input file to `.txt` file.
 
 # Execution
-`./build/checker /src/testInput.txt`
+`./build/checker ./src/testInput.txt`
 - Or to write your own input file:
 - `/build/checker [INPUT_FILENAME].txt`
