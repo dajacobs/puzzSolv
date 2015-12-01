@@ -6,4 +6,4 @@
 # Execution
 `./build/checker ./src/testInput.txt`
 - Or to write your own input file:
-- `/build/checker [INPUT_FILENAME].txt`
+- `./build/checker [INPUT_FILENAME].txt`
